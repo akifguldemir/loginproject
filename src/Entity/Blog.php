@@ -4,10 +4,17 @@ namespace App\Entity;
 
 use App\Repository\BlogRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
- * @ORM\Entity(repositoryClass=BlogRepository::class)
+ * @ORM\Entity
+ * @Vich\Uploadable
  */
+
+
 class Blog
 {
     /**
@@ -22,6 +29,15 @@ class Blog
      */
     private $image;
 
+    
+    /**
+     * @Vich\UploadableField(mapping="blog", fileNameProperty="image")
+     * @var File
+     */
+
+     private $imageFile;
+    
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -35,18 +51,6 @@ class Blog
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
     }
 
     public function getTitle(): ?string
@@ -72,4 +76,45 @@ class Blog
 
         return $this;
     }
+
+    /** 
+     * @return string|null
+    */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /** 
+     * @param string|null $image
+     * @return $this
+    */
+    public function setImage(?string $image):self
+    {
+        $this->image= $image;
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ? File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @return File|null $imageFile
+     */
+    public function setImageFile(?File $imageFile= null)
+    {
+        $this->imageFile= $imageFile;
+    }
+
+
+    
+
+
+
+
 }
