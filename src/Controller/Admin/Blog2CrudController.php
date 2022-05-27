@@ -29,7 +29,7 @@ class Blog2CrudController extends AbstractCrudController
                       
             TextField::new('title'),
             TextEditorField::new('description'),
-
+            TextField::new('slug'),
             ImageField::new('image')
             ->setBasePath('images/blog')
             ->setUploadDir('public/images/blog')
