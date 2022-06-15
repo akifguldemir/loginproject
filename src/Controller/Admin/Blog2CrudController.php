@@ -56,7 +56,6 @@ class Blog2CrudController extends AbstractCrudController
         ];
 
         return [
-            TextField::new('title'),
             TranslationField::new('translations', 'Translate', $fieldsConfig)
                 ->setRequired(true)
                 ->hideOnIndex(),
